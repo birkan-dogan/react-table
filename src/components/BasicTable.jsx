@@ -17,8 +17,14 @@ const BasicTable = () => {
 
   //
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    footerGroups,
+  } = tableInstance;
 
   // these are basically functions and arrays that useTable hook has given to us to enable easy table creation.
 
@@ -45,6 +51,15 @@ const BasicTable = () => {
           );
         })}
       </tbody>
+      <tfoot>
+        {footerGroups.map((footerGroup) => (
+          <tr {...footerGroup.getFooterGroupProps()}>
+            {footerGroup.headers.map((column) => (
+              <td {...column.getFooterProps}>{column.render("Footer")}</td>
+            ))}
+          </tr>
+        ))}
+      </tfoot>
     </table>
   );
 };
